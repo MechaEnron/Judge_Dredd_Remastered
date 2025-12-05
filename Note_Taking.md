@@ -14,9 +14,17 @@
 - Highscores
 - Credits
 
-StartEvents: reset_complete, game_ended
+`StartEvents: reset_complete, game_ended, cancel_login`
 
-StopEvents: login_started, game_started, stop_attract_mode
+`StopEvents: login_started, game_started, stop_attract_mode`
+
+```
+timed_switches:
+    login_mode:
+        switch_tags: start
+        time: 200
+        events_when_released: login_started
+```
 
 ### |Login Mode|
 
@@ -24,11 +32,70 @@ StopEvents: login_started, game_started, stop_attract_mode
 - Player enteres 3-letter initials to 'log in' and track variables/stats
 - Last initials entered remain as default for ease of signing in
 
-StartEvents: login_started
+`StartEvents: login_started`
 
-StopEvents: cancel_login, game_started
+`StopEvents: cancel_login, game_started`
+
+```
+timed_switches:
+    login_mode:
+        switch_tags: start
+        time: 200
+        events_when_released: cancel_login
+```
 
 ### |Base Mode|
+
+#### Scoring
+- Slings: 
+    - Left: 1,930
+    - Right: 1,930
+- StandUp Targets:
+    - Row of 3 StandUp Targets (sw18):
+        - Unlit: 50,000
+        - Advance Crime Level: 50,000 + 1,000,000
+    - Top Right Narrow StandUp (sw25): 50,000
+    - Bottom Left StandUp (sw27): 50,000
+    - Narrow StandUp at Left Ramp Entrance (sw36): 50,000
+- Drop Targets:
+    - Unlit/SteadyLit 'JUDGE' DT (sw54-sw58): 200,000
+    - Blinking 'JUDGE' DT (sw54-sw58): 200,000 + 500,000
+- Reactor:
+    - First reactor rollover (sw26): 400,000
+    - Second reactor rollover (sw53): 600,000
+    - Reactor Target (sw68):
+        - 1st time & all 'ODD' Hits: 1,000,000
+        - 2nd time: 1,000,000 + 2X BONUS
+        - 4th time: 1,000,000 + 5,000,000
+        - 6th time: 1,000,000 + LITE EXTRA BALL
+        - 8th time & all 'EVEN' Hits: 1,000,000 + 5,000,000
+- Ramps:
+    - Right Ramp (sw76):
+        - 1st time Starts as Green Crime: 500,000 + 1,000,000
+        - Subsequent times: +500,000 (e.g., 1M, 1.5M, 2M,..)
+    - Air Raid Ramp: [manual] 500,000 and Start Air Raid Feature
+    - Center Ramp:
+        - Base 100,000
+        - 2nd Time: 500,000
+        - Increase by 500,000 each additional time until max 5M
+- Loops:
+    - Big Loop value:
+        - First hit: trigger 50,000 rollover on entry (sw33), 50,000 on exit (sw72), or reverse
+        - Quickly hitting Top Right Orbit Opto (sw72) into Left Rollover (sw33)
+        - Scores 1,000,000 and increases by 1,000,000 with each quickly hit subsequent loop
+        - Value resets after missing consecutive shot
+    - Top Right Loop:
+        - Trigger 50,000 rollover on entry (sw35), 50,000 on exit (sw72)
+- Rollovers:
+    - In-lane rollovers (sw17, sw34, sw43): 50,000
+    - Out-lane rollovers (sw16, sw42): 100,000
+    - Left Rollover (sw33): 50,000
+    - Top Right Orbit Opto (sw72): 50,000
+- Sniper Tower VUK:
+    - Base 500,00
+    - Starts as Green Crime so first hit really gets 50,000 + 1,000,000
+- Judge Subway: 100,000
+- Air Raid
 
 ### |Pursuit - Chain Link Mode|
 
@@ -151,3 +218,4 @@ Can be source of point farming. **Remastered** rules will degrade points on ramp
 >- The Spug Squad – Petrol-bombing juves
 >- The Rad-ghoul “Moloko”
 >- Marauder King “Kleg-Hunter Vox” – Kleg-ally aligned criminal
+
